@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2e7d4f">
+  <meta name="description" content="Pick what you have at home and get Jain-friendly evening snack and light meal ideas.">
+  <title>Aaje Shu Banavishu? · આજે શું બનાવીશું?</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍲</text></svg>">
+  <!-- Fonts are optional: if there is no internet, the app falls back to system fonts. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@600;700&family=Mukta+Vaani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="app">
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-logo" aria-hidden="true">🍲</span>
+        <div>
+          <h1 class="brand-title" lang="gu">આજે શું બનાવીશું?</h1>
+          <p class="brand-sub">Aaje Shu Banavishu? · Your Daily Food Inspiration</p>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ============ HOME ============ -->
+      <section class="view" id="view-home" aria-labelledby="homeTitle">
+        <div class="hero">
+          <p class="greeting" id="greeting">Jai Jinendra 🙏</p>
+          <h2 id="homeTitle" class="hero-q">Aaje shu banavishu?</h2>
+          <p class="hero-en">What shall we make today?</p>
+        </div>
+
+        <div id="banners"></div>
+
+        <section class="panel" aria-labelledby="haveTitle">
+          <h2 id="haveTitle" class="panel-title">What do we have at home?</h2>
+
+          <div class="search-wrap">
+            <label for="ingSearch" class="visually-hidden">Search ingredients</label>
+            <span class="search-icon" aria-hidden="true">🔍</span>
+            <input id="ingSearch" type="search" autocomplete="off" autocapitalize="off" spellcheck="false"
+                   placeholder="Type an ingredient in Gujarati, English or Gujarati using English letters..."
+                   aria-controls="searchResults">
+            <div id="searchResults" class="search-results" hidden></div>
+          </div>
+
+          <div id="selectedTray" class="tray"></div>
+
+          <div id="catTabs" class="chip-row" role="tablist" aria-label="Ingredient categories"></div>
+          <div id="ingredientGrid"></div>
+        </section>
+
+        <details class="panel filters" id="filtersPanel">
+          <summary>Filters <span class="muted">(optional)</span> <span id="filterCount" class="filter-count"></span></summary>
+          <div id="filterChips" class="chip-wrap"></div>
+        </details>
+
+        <section id="results" class="results" aria-live="polite" tabindex="-1"></section>
+      </section>
+
+      <!-- ============ FAVOURITES ============ -->
+      <section class="view" id="view-favourites" aria-labelledby="favTitle" hidden>
+        <h2 id="favTitle" class="view-title">❤️ Favourites</h2>
+        <div id="favList"></div>
+        <h3 class="section-title">🍽️ Recently made</h3>
+        <div id="recentList"></div>
+      </section>
+
+      <!-- ============ RECIPES ============ -->
+      <section class="view" id="view-recipes" aria-labelledby="recTitle" hidden>
+        <div class="view-head">
+          <h2 id="recTitle" class="view-title">📖 All Recipes</h2>
+          <button type="button" class="btn btn-primary btn-sm" data-action="new-recipe">+ Add recipe</button>
+        </div>
+        <div class="search-wrap">
+          <label for="recipeSearch" class="visually-hidden">Search recipes</label>
+          <span class="search-icon" aria-hidden="true">🔍</span>
+          <input id="recipeSearch" type="search" autocomplete="off" placeholder="Search dishes or ingredients (e.g. thepla, methi, બટાકા)…">
+        </div>
+        <div id="recipeCats" class="chip-row"></div>
+        <p id="recipeCount" class="muted small"></p>
+        <div id="recipeList" class="card-grid"></div>
+      </section>
+
+      <!-- ============ SETTINGS ============ -->
+      <section class="view" id="view-settings" aria-labelledby="setTitle" hidden>
+        <h2 id="setTitle" class="view-title">⚙️ Settings</h2>
+        <div id="settingsBody"></div>
+      </section>
+    </main>
+
+    <!-- Main actions, always visible on Home -->
+    <div class="cta-bar" id="ctaBar">
+      <button type="button" class="btn btn-primary btn-big" data-action="suggest" id="btnSuggest">
+        🍳 Suggest What to Cook <span class="cta-count" id="ctaCount" hidden></span>
+      </button>
+      <button type="button" class="btn btn-saffron btn-big-alt" data-action="surprise">🎲 Surprise Me</button>
+    </div>
+
+    <nav class="bottom-nav" aria-label="Main">
+      <button type="button" data-nav="home" aria-current="page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+        <span>Home</span>
+      </button>
+      <button type="button" data-nav="favourites">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-9-8.6C1.6 8.3 3.6 5 7 5c2 0 3.3 1.1 5 3 1.7-1.9 3-3 5-3 3.4 0 5.4 3.3 4 6.4-2 4.2-9 8.6-9 8.6z"/></svg>
+        <span>Favourites</span>
+      </button>
+      <button type="button" data-nav="recipes">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h10a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M8 20a3 3 0 0 1 0-6h10M9 8h6M9 11h4"/></svg>
+        <span>Recipes</span>
+      </button>
+      <button type="button" data-nav="settings">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+        <span>Settings</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Pop-up sheets: recipe details, editors, confirmations -->
+  <dialog id="sheet" class="sheet" aria-labelledby="sheetTitle"></dialog>
+  <dialog id="confirmDialog" class="confirm" aria-labelledby="confirmTitle"></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
